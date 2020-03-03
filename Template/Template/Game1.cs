@@ -11,6 +11,10 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D spelarbild;
+        Texture2D fiendebild;
+        Vector2 spelarePosition;
+        Vector2 fiendePosition;
         //KOmentar
         public Game1()
         {
@@ -27,6 +31,8 @@ namespace Template
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            spelarePosition = new Vector2(0, 0);
+            fiendePosition = new Vector2(0, 100);
 
             base.Initialize();
         }
@@ -39,7 +45,8 @@ namespace Template
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            spelarbild = Content.Load<Texture2D>("spelare");
+            fiendebild = Content.Load<Texture2D>("fiende");
             // TODO: use this.Content to load your game content here 
         }
 
@@ -64,6 +71,8 @@ namespace Template
 
             // TODO: Add your update logic here
 
+
+
             base.Update(gameTime);
         }
 
@@ -74,7 +83,13 @@ namespace Template
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();//här börjar skärmen rita
 
+            spriteBatch.Draw(spelarbild, new Rectangle(spelarePosition.ToPoint() , new Point(150, 100)), Color.White);
+
+            spriteBatch.Draw(fiendebild, new Rectangle(fiendePosition.ToPoint(), new Point(150, 100)), Color.White);
+
+            spriteBatch.End();//här slutar skärmen rita
             // TODO: Add your drawing code here.
 
             base.Draw(gameTime);
